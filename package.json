@@ -1,15 +1,27 @@
 {
-  "name": "yummy less",
-  "version": "0.0.1",
-  "description": "less compile components for yummy fed",
-  "devDependencies": {
+  "name": "yummyslide",
+  "version": "1.0.0",
+  "description": "yummySlide 是一个专门针对于H5的滑页插件，based on jQuery，以下简要介绍使用方法",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stop2stare/yummySlide.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stop2stare/yummySlide/issues"
+  },
+  "homepage": "https://github.com/stop2stare/yummySlide#readme",
+  "dependencies": {
     "gulp": "*",
-    "gulp-connect": "^2.2.0",
-    "gulp-less": "*",
-    "gulp-sass": "*",
+    "gulp-connect": "^2.3.1",
+    "gulp-less": "^3.0.5",
     "gulp-livereload": "^3.8.1",
-    "gulp-plumber": "^1.0.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-watch": "*"
+    "gulp-sourcemaps": "*",
+    "gulp-watch": "^4.3.5"
   }
 }
