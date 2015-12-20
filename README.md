@@ -1,5 +1,5 @@
 # yummySlide
-###### yummySlide 是一个专门针对于H5的滑页插件，based on jQuery，以下简要介绍使用方法
+yummySlide 是一个专门针对于H5的滑页插件，based on jQuery，以下简要介绍使用方法
 
 ### 使用方法
 - `	<div class="y-slide">
@@ -15,16 +15,16 @@
         loop: true
     });`
 
-###### 以上就能正确使用 *yummySlide* 了，当然，引入必要的文件也是必不可少的
+以上就能正确使用 *yummySlide* 了，当然，引入必要的文件也是必不可少的
 
 ### 依赖文件
 - jQuery.js v-1.6^
 - yummySlide.js
-###### *yummySlide* 依赖于jQuery，建议使用1.6及以上版本的jQuery，同时，引入yummySlide的核心文件，**yummySlide.js**
-###### *yummySlide* 建议将动画写入 ./less 目录下的 *y-slide.less* less文件中，按照已有动画的规范
+*yummySlide* 依赖于jQuery，建议使用1.6及以上版本的jQuery，同时，引入yummySlide的核心文件，**yummySlide.js**
+*yummySlide* 建议将动画写入 ./less 目录下的 *y-slide.less* less文件中，按照已有动画的规范
 
 ### 接口定义
-###### *yummySlide* 目前定义了以下接口
+*yummySlide* 目前定义了以下接口
 
 | API           | USAGE                                | VALUE                           | DEFAULT     | EXAMPLE    |
 | ------------- |:------------------------------------:| :------------------------------:|:-----------:|:----------:|
