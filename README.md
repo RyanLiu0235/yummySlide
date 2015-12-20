@@ -36,7 +36,7 @@
 | ------------- |:---------------------:| :-----------------:| -----------:|
 | mode          | define which kind of  | normal cover scale | normal      |
 |				| switch you want       | fade               |             |
-| direction     | define which direction you want it to slide| vertical horizontal| horizontal  |
+| direction     | define which direction <br> you want it to slide| vertical horizontal| horizontal  |
 | loop          | if the slide is loop  | true false         | false       |
 | order         | define the order the  | sequential reverser| sequential  |
 |               | slide works           | [array]            |             |
