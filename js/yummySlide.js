@@ -1,3 +1,9 @@
+/**
+ * YummySlide
+ * @author liucheng 421922402@qq.com
+ * @version 1.0.0
+ */
+
 ;
 (function($) {
     $.fn.yummySlide = function(option) {
@@ -46,7 +52,10 @@
         loop: false, // false | true 循环滑动 默认不循环滚动
         order: 'sequential', // sequential | reverse | [array] 播放次序 顺序|逆序 或者数组来表示 默认顺序
         direction: 'vertical', // vertical | horizontal 滑动方向 默认纵向滑动
-        mode: 'scale' // normal | cover | fade | scale 切换效果 普通|覆盖|淡入淡出|缩放 默认普通
+        mode: 'scale', // normal | cover | fade | scale 切换效果 普通|覆盖|淡入淡出|缩放 默认普通
+        loadFn: null, // 每一页加载完成后执行函数
+        init: null, // 首次加载完成后执行函数
+        custom: null // 自定义触发滑动方法
     };
 
     var SlideMethod = function(mode) {

@@ -14,6 +14,7 @@
         direction: 'vertical',
         loop: true
     });`
+
 ###### 以上就能正确使用 *yummySlide* 了，当然，引入必要的文件也是必不可少的
 
 ### 依赖文件
@@ -23,12 +24,14 @@
 ###### *yummySlide* 建议将动画写入 ./less 目录下的 *y-slide.less* less文件中，按照已有动画的规范
 
 ### 接口定义
-###### *yummySlide* 目前定义了一下接口
+###### *yummySlide* 目前定义了以下接口
 
-| API           | USAGE                                | VALUE                           | DEFAULT     |
-| ------------- |:------------------------------------:| :------------------------------:| -----------:|
-| mode          | define which kind of switch you want | normal cover scale fade         | normal      |
-| direction     | define which direction you want <br> it to slide| vertical horizontal  | horizontal  |
-| loop          | if the slide is loop                 | true false                      | false       |
-| order         | define the order the slide works     | sequential reverse [array]      | sequential  |
-| custom        | define the way to trigger slide      | two params, trigger is the<br> way and obj is the<br> object which you <br>bind to| none        | 
+| API           | USAGE                                | VALUE                           | DEFAULT     | EXAMPLE    |
+| ------------- |:------------------------------------:| :------------------------------:|:-----------:|:----------:|
+| mode          | define which kind of switch you want | normal cover scale fade         | normal      | mode: 'normal'|
+| direction     | define which direction you want it<br> to slide| vertical horizontal  | horizontal  | direction: 'horizontal' |
+| loop          | if the slide is loop                 | true false                      | false       | loop: true |
+| order         | define the order the slide works     | sequential reverse [array]      | sequential  | order: [2, 1, 4, 3, 0, 5] |
+| custom        | define the way to trigger slide      | two params, trigger is the<br> way and obj is the object<br> which you bind to| none        | custom : {obj: $('ele'), trigger: 'click'}|
+| init          | define the functions that executed<br> after init | some logics and functions | null    | init: { $('ele').show();} |
+| loadFn        | define the functions that executed<br> after every page has shown | array | null | loadFn : [1: {fn: foo, arguments: boo}] | 
