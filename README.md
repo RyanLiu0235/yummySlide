@@ -38,9 +38,5 @@
 |				| switch you want       | fade               |             |
 | direction     | define which direction <br> you want it to slide| vertical horizontal| horizontal  |
 | loop          | if the slide is loop  | true false         | false       |
-| order         | define the order the  | sequential reverser| sequential  |
-|               | slide works           | [array]            |             |
-| custom        | define the way to     | two params, trigger| none        |
-|               | trigger slide         | is the way and obj |             |
-|               |                       | is the object which|             |
-|               |                       | you bind to        |             |
+| order         | define the order the<br> slide works   | sequential reverse <br> [array] | sequential  |
+| custom        | define the way to trigger<br> slide  | two params, trigger is the<br> way and obj is the<br> object which you <br>bind to| none        |
