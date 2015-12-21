@@ -12,23 +12,23 @@ gulp.task('connect', function() {
     });
 });
 gulp.task('livereload', function() {
-    gulp.src(['./less/*.less', './*.html', './js/*.js'])
-        .pipe(watch(['./less/*.less', './*.html'], ['less']))
+    gulp.src(['./example/less/*.less', './example/*.html', './example/js/*.js'])
+        .pipe(watch(['./example/less/*.less', './example/*.html'], ['less']))
         .pipe(connect.reload());
 });
 gulp.task('less', function() {
-    gulp.src(['./less/*.less', './dist/*.less'])
+    gulp.src(['./example/less/*.less', './example/dist/*.less'])
         .pipe(sourcemaps.init())
         .pipe(less())
         .on('error', function(err) {
             console.log(err)
         })
         .pipe(sourcemaps.write('../maps'))
-        .pipe(gulp.dest('./css'));
+        .pipe(gulp.dest('./example/css'));
 });
 
 gulp.task('watch', function() {
-    gulp.watch(['./less/*.less', './dist/*.less'], ['less']);
+    gulp.watch(['./example/less/*.less', './example/dist/*.less'], ['less']);
 });
 
 gulp.task('default', ['watch', 'less', 'connect'], function () {
