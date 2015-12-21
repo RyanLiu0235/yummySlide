@@ -3,22 +3,22 @@ yummySlide 是一个专门针对于H5的滑页插件，based on jQuery，以下�
 
 ### 使用方法
 
-- 	``` html
-	<div class="y-slide">
-		<div class="container">
-			<div class="page"></div>
-			<div class="page"></div>
-			<div class="page"></div>
-		</div>
+``` html
+<div class="y-slide">
+	<div class="container">
+		<div class="page"></div>
+		<div class="page"></div>
+		<div class="page"></div>
 	</div>
-	```
-- 	``` javascript
-	$('.y-slide').yummySlide({
-        mode: 'normal',
-        direction: 'vertical',
-        loop: true
-    });
-    ```
+</div>
+```
+``` javascript
+$('.y-slide').yummySlide({
+	mode: 'normal',
+	direction: 'vertical',
+	loop: true
+});
+```
 
 以上就能正确使用 *yummySlide* 了，当然，引入必要的文件也是必不可少的
 
