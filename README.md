@@ -1,10 +1,9 @@
 # yummySlide
-===
 yummySlide 是一个专门针对于H5的滑页插件，based on jQuery，以下简要介绍使用方法
 
 ### 使用方法
 
-- 	```` html
+- 	``` html
 	<div class="y-slide">
 		<div class="container">
 			<div class="page"></div>
@@ -12,14 +11,14 @@ yummySlide 是一个专门针对于H5的滑页插件，based on jQuery，以下�
 			<div class="page"></div>
 		</div>
 	</div>
-	````
-- 	```` javascript
+	```
+- 	``` javascript
 	$('.y-slide').yummySlide({
         mode: 'normal',
         direction: 'vertical',
         loop: true
     });
-    ````
+    ```
 
 以上就能正确使用 *yummySlide* 了，当然，引入必要的文件也是必不可少的
 
