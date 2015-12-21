@@ -35,13 +35,13 @@ $('.y-slide').yummySlide({
 
 | API           | USAGE                                | VALUE                           | DEFAULT     | EXAMPLE    |
 | ------------- |:------------------------------------:| :------------------------------:|:-----------:|:----------:|
-| mode          | define which kind of switch you want | normal cover scale fade         | normal      | mode: 'normal'|
-| direction     | define which direction you want it to slide| vertical horizontal  | horizontal  | direction: 'horizontal' |
-| loop          | if the slide is loop                 | true false                      | false       | loop: true |
-| order         | define the order the slide works     | sequential reverse [array]      | sequential  | order: [2, 1, 4, 3, 0, 5] |
-| custom        | define the way to trigger slide      | two params, trigger is the way and obj is the object which you bind to| none        | custom : {obj: $('ele'), trigger: 'click'}|
-| init          | define the functions that executed after init | some logics and functions | null    | init: { $('ele').show();} |
-| loadFn        | define the functions that executed after every page has shown | array | null | loadFn : [1: {fn: foo, arguments: boo}] |
+| mode          | define which kind of switch you want | normal cover scale fade         | normal      |``` javascript mode: 'normal' ```|
+| direction     | define which direction you want it to slide| vertical horizontal  | horizontal  |``` javascript direction: 'horizontal'``` |
+| loop          | if the slide is loop                 | true false                      | false       |``` javascript loop: true``` |
+| order         | define the order the slide works     | sequential reverse [array]      | sequential  |``` javascript order: [2, 1, 4, 3, 0, 5]``` |
+| custom        | define the way to trigger slide      | two params, trigger is the way and obj is the object which you bind to| none        |``` javascript custom : {obj: $('ele'), trigger: 'click'}```|
+| init          | define the functions that executed after init | some logics and functions | null    |``` javascript init: { $('ele').show();}``` |
+| loadFn        | define the functions that executed after every page has shown | array | null |``` javascript loadFn : 1: [{ fn: count, arguments: [$('.page').eq(1).find('.number')]}]``` |
 
 ### 以下是一个小例子
 
