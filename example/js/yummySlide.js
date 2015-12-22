@@ -7,8 +7,7 @@
 ;
 (function($) {
     $.fn.yummySlide = function(option) {
-        var _slide = new Slide(this, option);
-        _slide.init();
+        return new Slide(this, option);
     };
 
     var Slide = function(slide, option) {
@@ -18,6 +17,7 @@
         Slide.params.pageLength = $(slide).find('.container .page').length;
 
         Slide.opts = $.extend({}, Slide.option, option);
+        this.init();
     };
 
     Slide.prototype.init = function() {
@@ -198,13 +198,13 @@
     };
 
     // addAnimation与removeAnimation方法，让页面稳定之后再加载动画，页面隐藏动画即隐藏
-    addAnimation = function(page) {
+    var addAnimation = function(page) {
         page.find('[data-animation]').each(function() {
             $(this).addClass($(this).data('animation'));
         });
     };
 
-    removeAnimation = function(page) {
+    var removeAnimation = function(page) {
         page.find('[data-animation]').each(function() {
             $(this).removeClass($(this).data('animation'));
         });
@@ -242,7 +242,7 @@
         if (!!Slide.params.isAnimating) return;
         var params = Slide.params,
             $page = params.page;
-        var touch = e.originalEvent.touches[0];
+        var touch = window.Zepto ? e.changedTouches[0] : e.originalEvent.touches[0];
         params.startPos = getPosition(touch);
         params.curPage = $page.eq(params.order[params.pageIndex]);
     }
@@ -251,7 +251,7 @@
         if (!!Slide.params.isAnimating || !Slide.params.startPos) return;
         e.preventDefault();
         Slide.params.isTap = false;
-        var touch = e.originalEvent.touches[0];
+        var touch = window.Zepto ? e.changedTouches[0] : e.originalEvent.touches[0];
         var coordinate = getPosition(touch); // 获取当前坐标
 
         var params = Slide.params,
@@ -260,7 +260,7 @@
             $curPage = params.curPage;
 
         var distance = coordinate - startPos;
-        if (distance < 0 && $curPage.hasClass('pause')) return ; // 如果往前滑而且当前页还没有触发过自定义滑动
+        if (distance < 0 && $curPage.hasClass('pause')) return; // 如果往前滑而且当前页还没有触发过自定义滑动
         // 判断是否滑过起点改变方向，否则就直接跳过getNextPage
         if (isForward() !== params.isForward || params.isForward === 0 || params.isForward === null) getNextPage(distance); // 获取nextPage
         $nextPage = Slide.params.nextPage;
@@ -317,9 +317,9 @@
         }
     })();
 
-/**
- * 内部私有方法
- */
+    /**
+     * 内部私有方法
+     */
 
 
     function getWH() {
@@ -330,12 +330,13 @@
     function getPosition(touch) {
         return isVertical() ? touch.pageY : touch.pageX;
     }
+
     function isVertical() {
         return Slide.opts.direction === 'vertical';
     }
 
     function getNextPage(distance) {
-        if (distance == 0) return !!Slide.params.nextPage && (Slide.params.nextPage = null);
+        if (distance === 0) return !!Slide.params.nextPage && (Slide.params.nextPage = null);
 
         var params = Slide.params,
             $page = params.page,
@@ -345,9 +346,9 @@
         var loop = Slide.opts.loop;
         var max = pageLength - 1;
         if (distance < 0) {
-            params.nextPage = pageIndex == max ? (loop ? $page.eq(order[0]) : null) : $page.eq(order[pageIndex+1]);
+            params.nextPage = pageIndex == max ? (loop ? $page.eq(order[0]) : null) : $page.eq(order[pageIndex + 1]);
         } else {
-            params.nextPage = pageIndex == 0 ? (loop ? $page.eq(order[max]) : null) : $page.eq(order[pageIndex-1]);
+            params.nextPage = pageIndex == 0 ? (loop ? $page.eq(order[max]) : null) : $page.eq(order[pageIndex - 1]);
         }
         if (params.nextPage === null) {
             return params.startPos = 0;
@@ -359,9 +360,13 @@
 
     function initNextPage(params) {
         if (isVertical()) {
-            params.nextPage.css({'top': params.isForward ? '100%' : '-100%'});
+            params.nextPage.css({
+                'top': params.isForward ? '100%' : '-100%'
+            });
         } else {
-            params.nextPage.css({'left': params.isForward ? '100%' : '-100%'});
+            params.nextPage.css({
+                'left': params.isForward ? '100%' : '-100%'
+            });
         }
     }
 
@@ -369,11 +374,11 @@
         return Slide.params.curPos < Slide.params.startPos;
     }
 
-/**
- * _transNext     方法为滑动的基本方法，其他效果的方法可扩展此方法
- * _transSucceed  方法为滑动成功之后放手自动完成余下滑动的基本方法，其他效果的方法可扩展此方法
- * _transFail     方法为滑动失败之后放手自动完成余下滑动的基本方法，其他效果的方法可扩展此方法
- */
+    /**
+     * _transNext     方法为滑动的基本方法，其他效果的方法可扩展此方法
+     * _transSucceed  方法为滑动成功之后放手自动完成余下滑动的基本方法，其他效果的方法可扩展此方法
+     * _transFail     方法为滑动失败之后放手自动完成余下滑动的基本方法，其他效果的方法可扩展此方法
+     */
     SlideMethod._transNext = function(curPage, nextPage, _curTrans, _nextTrans) {
         curPage.css({
             '-webkit-transform': _curTrans,
@@ -456,7 +461,7 @@
             setTimeout(function() {
                 params.isAnimating = params.nextPage = params.startPos = params.curPos = params.isForward = null;
             }, 20);
-        }).emulateTransitionEnd(900+10);
+        }).emulateTransitionEnd(900 + 10);
     }
     SlideMethod._transFail = function(curPage, nextPage, params) {
         curPage.css({
@@ -493,26 +498,26 @@
             setTimeout(function() {
                 params.isAnimating = params.nextPage = params.startPos = params.curPos = params.isForward = null;
             }, 20);
-        }).emulateTransitionEnd(900+50);
+        }).emulateTransitionEnd(900 + 50);
     }
 
-/**
- * 内置滑动方法，内部滑动方法扩展SlideMethod三个方法
- * normal 方法为基本滑动，无任何效果
- * scale  方法为缩放
- * fade   方法为淡入淡出效果，不配合缩放
- * cover  方法为覆盖滑动
- */
+    /**
+     * 内置滑动方法，内部滑动方法扩展SlideMethod三个方法
+     * normal 方法为基本滑动，无任何效果
+     * scale  方法为缩放
+     * fade   方法为淡入淡出效果，不配合缩放
+     * cover  方法为覆盖滑动
+     */
     SlideMethod.normal = {
         transNext: function(curPage, nextPage, distance) {
-            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, '+distance+'px, 0)' : 'translate3d('+distance+'px, 0, 0)';
+            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, ' + distance + 'px, 0)' : 'translate3d(' + distance + 'px, 0, 0)';
             SlideMethod._transNext(curPage, nextPage, _curTrans, _nextTrans);
         },
 
         transSucceed: function(curPage, nextPage, distance) {
             var params = Slide.params;
             getWH();
-            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, '+params.h+'px, 0)' : 'translate3d('+params.w+'px, 0, 0)';
+            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, ' + params.h + 'px, 0)' : 'translate3d(' + params.w + 'px, 0, 0)';
             SlideMethod._transSucceed(curPage, nextPage, _curTrans, _nextTrans, params);
         },
 
@@ -528,8 +533,8 @@
                 '-webkit-transform-origin': Slide.params.isForward ? (isVertical() ? 'center bottom' : 'right center') : (isVertical() ? 'center top' : 'left center'),
                 'transform-origin': Slide.params.isForward ? (isVertical() ? 'center bottom' : 'right center') : (isVertical() ? 'center top' : 'left center')
             });
-            var _curTrans = isVertical() ? 'translate3d(0, '+distance+'px, 0) scale('+Math.sqrt(_scale)+')' : 'translate3d('+distance+'px, 0, 0) scale('+Math.sqrt(_scale)+')';
-            var _nextTrans = isVertical() ? 'translate3d(0, '+distance+'px, 0) scale(1)' : 'translate3d('+distance+'px, 0, 0) scale(1)';
+            var _curTrans = isVertical() ? 'translate3d(0, ' + distance + 'px, 0) scale(' + Math.sqrt(_scale) + ')' : 'translate3d(' + distance + 'px, 0, 0) scale(' + Math.sqrt(_scale) + ')';
+            var _nextTrans = isVertical() ? 'translate3d(0, ' + distance + 'px, 0) scale(1)' : 'translate3d(' + distance + 'px, 0, 0) scale(1)';
             SlideMethod._transNext(curPage, nextPage, _curTrans, _nextTrans);
         },
 
@@ -537,8 +542,8 @@
             var params = Slide.params;
             var _scale = isVertical() ? (1 - Math.abs(distance) / $(window).height()) : (1 - Math.abs(distance) / $(window).width());
             getWH();
-            var _curTrans = isVertical() ? 'translate3d(0, '+params.h+'px, 0) scale('+Math.sqrt(_scale)+')' : 'translate3d('+params.w+'px, 0, 0) scale('+Math.sqrt(_scale)+')';
-            var _nextTrans = isVertical() ? 'translate3d(0, '+params.h+'px, 0) scale(1)' : 'translate3d('+params.w+'px, 0, 0) scale(1)';
+            var _curTrans = isVertical() ? 'translate3d(0, ' + params.h + 'px, 0) scale(' + Math.sqrt(_scale) + ')' : 'translate3d(' + params.w + 'px, 0, 0) scale(' + Math.sqrt(_scale) + ')';
+            var _nextTrans = isVertical() ? 'translate3d(0, ' + params.h + 'px, 0) scale(1)' : 'translate3d(' + params.w + 'px, 0, 0) scale(1)';
             SlideMethod._transSucceed(curPage, nextPage, _curTrans, _nextTrans, params);
         },
 
@@ -550,7 +555,7 @@
     SlideMethod.fade = {
         transNext: function(curPage, nextPage, distance) {
             var _scale = isVertical() ? (1 - Math.abs(distance) / $(window).height()) : (1 - Math.abs(distance) / $(window).width());
-            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, '+distance+'px, 0)' : 'translate3d('+distance+'px, 0, 0)';
+            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, ' + distance + 'px, 0)' : 'translate3d(' + distance + 'px, 0, 0)';
             curPage.css('opacity', Math.pow(_scale, 2));
             nextPage.css('opacity', 1.5 - _scale);
             SlideMethod._transNext(curPage, nextPage, _curTrans, _nextTrans);
@@ -559,7 +564,7 @@
         transSucceed: function(curPage, nextPage, distance) {
             var params = Slide.params;
             getWH();
-            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, '+params.h+'px, 0)' : 'translate3d('+params.w+'px, 0, 0)';
+            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, ' + params.h + 'px, 0)' : 'translate3d(' + params.w + 'px, 0, 0)';
             curPage.css('opacity', 0);
             nextPage.css('opacity', 1);
             SlideMethod._transSucceed(curPage, nextPage, _curTrans, _nextTrans, params);
@@ -574,14 +579,14 @@
     }
     SlideMethod.cover = {
         transNext: function(curPage, nextPage, distance) {
-            var _nextTrans = isVertical() ? 'translate3d(0, '+distance+'px, 0)' : 'translate3d('+distance+'px, 0, 0)';
+            var _nextTrans = isVertical() ? 'translate3d(0, ' + distance + 'px, 0)' : 'translate3d(' + distance + 'px, 0, 0)';
             SlideMethod._transNext(curPage, nextPage, 'none', _nextTrans);
         },
 
         transSucceed: function(curPage, nextPage, distance) {
             var params = Slide.params;
             getWH();
-            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, '+params.h+'px, 0)' : 'translate3d('+params.w+'px, 0, 0)';
+            var _curTrans = _nextTrans = isVertical() ? 'translate3d(0, ' + params.h + 'px, 0)' : 'translate3d(' + params.w + 'px, 0, 0)';
             SlideMethod._transSucceed(curPage, nextPage, 'none', _nextTrans, params);
         },
 
@@ -590,4 +595,4 @@
             SlideMethod._transFail(curPage, nextPage, params);
         }
     }
-})(jQuery || window.jQuery);
+})(window.jQuery || window.Zepto);

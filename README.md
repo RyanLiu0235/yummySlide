@@ -26,7 +26,7 @@ $('.y-slide').yummySlide({
 
 - jQuery.js v-1.6^
 - yummySlide.js
-*yummySlide* 依赖于jQuery，建议使用1.6及以上版本的jQuery，同时，引入yummySlide的核心文件，**yummySlide.js**
+*yummySlide* 依赖于jQuery，建议使用1.6及以上版本的jQuery，同时，引入yummySlide的核心文件，**yummySlide.js**.
 *yummySlide* 建议将动画写入 ./less 目录下的 **y-slide.less** 文件中，按照已有动画的规范
 
 ### 接口定义

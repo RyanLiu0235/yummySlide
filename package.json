@@ -1,7 +1,7 @@
 {
   "name": "yummyslide",
   "version": "1.0.0",
-  "description": "yummySlide 是一个专门针对于H5的滑页插件，based on jQuery，以下简要介绍使用方法",
+  "description": "yummySlide 是一个专门针对于H5的滑页插件，based on jQuery",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

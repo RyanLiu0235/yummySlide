@@ -170,28 +170,28 @@ body {
   border-top: 50px solid #DF8585;
 }
 .page:nth-of-type(1) {
-  background-color: #EF9C89;
+  background-color: #885A4F;
 }
 .page:nth-of-type(2) {
-  background-color: #FDEE84;
+  background-color: #8A8147;
 }
 .page:nth-of-type(3) {
-  background-color: #C3FFB2;
+  background-color: #629E51;
 }
 .page:nth-of-type(4) {
-  background-color: #84FDDD;
+  background-color: #57A590;
 }
 .page:nth-of-type(5) {
-  background-color: #89B5EF;
+  background-color: #536D8E;
 }
 .page:nth-of-type(6) {
-  background-color: #BE85DF;
+  background-color: #7C5592;
 }
 .page:nth-of-type(7) {
-  background-color: #DF85AE;
+  background-color: #8A526B;
 }
 .page:nth-of-type(8) {
-  background-color: #DF8585;
+  background-color: #925757;
 }
 
 /*# sourceMappingURL=../maps/style.css.map */
