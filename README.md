@@ -22,12 +22,16 @@ $('.y-slide').yummySlide({
 
 以上就能正确使用 *yummySlide* 了，当然，引入必要的文件也是必不可少的
 
+### CSS3动画
+
+yummySlide.js内部对CSS3动画的加载做了优化与规定，*yummySlide* 建议将动画写入 ./less 目录下的 **y-slide.less** 文件中，按照已有动画的规范，将对应的动画名称写入元素的 data-animation 属性中。页面滑动到对应page时，yummySlide 会在页面滑动结束时来一次性加载动画，如果需要延迟动画，请自行在 animation 中添加animation-delay值。规范的书写有利用您管理自己的动画，也有利于充分利用 yummySlide 。
+
 ### 依赖文件
 
 - jQuery.js v-1.6^
 - yummySlide.js
 *yummySlide* 依赖于jQuery，建议使用1.6及以上版本的jQuery，同时，引入yummySlide的核心文件，**yummySlide.js**.
-*yummySlide* 建议将动画写入 ./less 目录下的 **y-slide.less** 文件中，按照已有动画的规范
+
 
 ### 接口定义
 
