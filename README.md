@@ -28,9 +28,9 @@ yummySlide.js内部对CSS3动画的加载做了优化与规定，*yummySlide* �
 
 ### 依赖文件
 
-- jQuery.js v-1.6^
+- **jQuery.js** or **Zepto.js**
 - yummySlide.js
-*yummySlide* 依赖于jQuery，建议使用1.6及以上版本的jQuery，同时，引入yummySlide的核心文件，**yummySlide.js**.
+*yummySlide* 依赖于jQuery，后来也支持了Zepto，建议使用1.6及以上版本的jQuery或者高版本的Zepto，同时，引入yummySlide的核心文件，**yummySlide.js**.
 
 
 ### 接口定义
