@@ -1,36 +1,37 @@
 var gulp = require('gulp'),
-    watch = require('gulp-watch'),
     less = require('gulp-less'),
-    connect = require('gulp-connect'),
-    sourcemaps = require('gulp-sourcemaps'),
-    livereload = require('gulp-livereload');
+    sourcemap = require('gulp-sourcemaps'),
+    browserSync = require('browser-sync'),
+    reload = browserSync.reload;
 
-gulp.task('connect', function() {
-    connect.server({
-        livereload: true,
-        port: '7040'
+var src = {
+    less: 'app/less/*.less',
+    css: 'app/css',
+    html: 'app/*.html',
+    map: 'app/maps'
+};
+
+// Static Server + watching less/html files
+gulp.task('serve', ['less'], function() {
+
+    browserSync({
+        server: "./app"
     });
+
+    gulp.watch(src.less, ['less']);
+    gulp.watch(src.html).on('change', reload);
 });
-gulp.task('livereload', function() {
-    gulp.src(['./example/less/*.less', './example/*.html', './example/js/*.js'])
-        .pipe(watch(['./example/less/*.less', './example/*.html'], ['less']))
-        .pipe(connect.reload());
-});
+
+// Compile less into CSS
 gulp.task('less', function() {
-    gulp.src(['./example/less/*.less', './example/dist/*.less'])
-        .pipe(sourcemaps.init())
+    return gulp.src(src.less)
+        .pipe(sourcemap.init())
         .pipe(less())
-        .on('error', function(err) {
-            console.log(err)
-        })
-        .pipe(sourcemaps.write('../maps'))
-        .pipe(gulp.dest('./example/css'));
+        .pipe(sourcemap.write(src.map))
+        .pipe(gulp.dest(src.css))
+        .pipe(reload({
+            stream: true
+        }));
 });
 
-gulp.task('watch', function() {
-    gulp.watch(['./example/less/*.less', './example/dist/*.less'], ['less']);
-});
-
-gulp.task('default', ['watch', 'less', 'connect'], function () {
-    gulp.start('livereload');
-});
+gulp.task('default', ['serve']);
