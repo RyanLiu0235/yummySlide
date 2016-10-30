@@ -49,4 +49,4 @@ yummySlide.js内部对CSS3动画的加载做了优化与规定，*yummySlide* �
 
 ### 以下是一个小例子
 
-![yummySlide demo](./demo-qrcode.png "yummySlide demo")
+![yummySlide demo](./qrcode.png)
