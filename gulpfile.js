@@ -3,6 +3,8 @@ var gulp = require('gulp'),
   sourcemap = require('gulp-sourcemaps'),
   uglify = require('gulp-uglify'),
   pump = require('pump'),
+  minifyCSS = require('gulp-minify-css'),
+  processhtml = require('gulp-processhtml'),
   autoprefixer = require('gulp-autoprefixer'),
   concat = require('gulp-concat'),
   browserSync = require('browser-sync'),
@@ -10,10 +12,16 @@ var gulp = require('gulp'),
 
 var src = {
   less: 'app/less/*.less',
-  js: './app/js/*.js',
+  js: 'app/js/*.js',
   css: 'app/css',
   html: 'app/*.html'
 };
+
+var buildSrc = {
+  js: 'build/js',
+  css: 'build/css',
+  html: 'build/'
+}
 
 // Static Server + watching less/html files
 gulp.task('serve', ['less'], function() {
@@ -32,7 +40,6 @@ gulp.task('less', function() {
     .pipe(sourcemap.init())
     .pipe(less())
     .pipe(autoprefixer())
-    .pipe(concat('slide.css'))
     .pipe(sourcemap.write())
     .pipe(gulp.dest(src.css))
     .pipe(reload({
@@ -40,15 +47,34 @@ gulp.task('less', function() {
     }));
 });
 
-// 压缩JS文件
-gulp.task('compress', function(cb) {
-  pump([
-      gulp.src(src.js),
-      uglify(),
-      gulp.dest('./dist')
-    ],
-    cb
-  );
+// 压缩css文件
+gulp.task('minify-css', ['less'], function() {
+  return gulp.src(src.css + '/slide.css')
+    .pipe(concat('slide.css'))
+    .pipe(minifyCSS())
+    .pipe(gulp.dest(buildSrc.css));
 });
+
+// 压缩JS文件
+gulp.task('uglify-js', function() {
+  pump([
+    gulp.src(src.js),
+    uglify(),
+    gulp.dest('./dist')
+  ]);
+});
+
+// 处理html文件
+gulp.task('processhtml', function () {
+  return gulp.src(src.html)
+    .pipe(processhtml())
+    .pipe(gulp.dest(buildSrc.html));
+});
+
+// 发布
+gulp.task('build', ['uglify-js', 'minify-css', 'processhtml'], function() {
+  gulp.src('./dist/*.js')
+    .pipe(gulp.dest(buildSrc.js));
+})
 
 gulp.task('default', ['serve']);
