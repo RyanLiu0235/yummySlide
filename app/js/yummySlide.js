@@ -85,7 +85,7 @@
     SlideMethod.prototype.transNext = method.transNext;
     SlideMethod.prototype.transSucceed = method.transSucceed;
     SlideMethod.prototype.transFail = method.transFail;
-  }
+  };
 
   Slide.params = {
     slide: null, // slider
@@ -145,21 +145,21 @@
     addAnimation(curPage);
 
     // 加载每一页之后的执行方法
-    if (!!Slide.opts.loadFn) {
+    if (isObjEmpty(Slide.opts.loadFn)) {
       var _loadFn = Slide.opts.loadFn[0] ? Slide.opts.loadFn[0] : null;
-      if (!!_loadFn) {
-        for (var i = 0, j = _loadFn.length; i < j; i++) {
-          var _fn = _loadFn[i].fn;
-          var _arguments = _loadFn[i].arguments;
-          var delay = _loadFn[i].delay ? _loadFn[i].delay : null;
-          if (!!delay) {
-            _fn && setTimeout(function() {
-              _fn.apply(Slide, _arguments);
+      if (isObjEmpty(_loadFn)) {
+        _loadFn.forEach(function(fn, i) {
+          var _fn = fn.fn;
+          var _arguments = fn.arguments ? fn.arguments : null;
+          var delay = fn.delay ? fn.delay : undefined;
+          if (isNaN(delay)) {
+            setTimeout(function() {
+              _fn.apply(this, _arguments);
             }, delay);
           } else {
-            _fn && _fn.apply(Slide, _arguments);
+            _fn.apply(this, _arguments);
           }
-        }
+        });
       }
     }
 
@@ -321,6 +321,19 @@
    * 内部私有方法
    */
 
+  function isObjEmpty(obj) {
+    if (obj === null) {
+      return 0;
+    }
+    var n = 0,
+      i;
+    for (i in obj) {
+      if (obj.hasOwnProperty(i)) {
+        n++;
+      }
+    }
+    return n;
+  }
 
   function getWH() {
     Slide.params.w = Slide.params.isForward ? -$(window).width() : $(window).width();
@@ -441,21 +454,21 @@
       }
       var pageIndex = params.pageIndex;
 
-      if (!!Slide.opts.loadFn) {
+      if (isObjEmpty(Slide.opts.loadFn)) {
         var _loadFn = Slide.opts.loadFn[pageIndex] ? Slide.opts.loadFn[pageIndex] : null;
-        if (!!_loadFn) {
-          for (var i = 0, j = _loadFn.length; i < j; i++) {
-            var _fn = _loadFn[i].fn;
-            var _arguments = _loadFn[i].arguments;
-            var delay = _loadFn[i].delay ? _loadFn[i].delay : null;
-            if (!!delay) {
-              _fn && setTimeout(function() {
-                _fn.apply(Slide, _arguments);
+        if (isObjEmpty(_loadFn)) {
+          _loadFn.forEach(function(fn, i) {
+            var _fn = fn.fn;
+            var _arguments = fn.arguments ? fn.arguments : null;
+            var delay = fn.delay ? fn.delay : undefined;
+            if (isNaN(delay)) {
+              setTimeout(function() {
+                _fn.apply(this, _arguments);
               }, delay);
             } else {
-              _fn && _fn.apply(Slide, _arguments);
+              _fn.apply(this, _arguments);
             }
-          }
+          });
         }
       }
       setTimeout(function() {

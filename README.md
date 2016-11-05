@@ -43,9 +43,9 @@ yummySlide.js内部对CSS3动画的加载做了优化与规定，*yummySlide* �
 | direction     | 定义滑动的方向                         | vertical horizontal            | horizontal  | direction: 'horizontal'  |
 | loop          | 是否循环滑动                          | true false                      | false       | loop: true               |
 | order         | 滑动的顺序                            | sequential reverse [array]      | sequential  | order: [2, 1, 4, 3, 0, 5] |
-| custom        | 如何开启滑动                          | obj是绑定的对象，trigger是触发的方法| none        | custom : {obj: $('ele'), trigger: 'click'}|
+| custom        | 如何开启滑动                          | obj是绑定的对象，trigger是触发的方法| null        | custom : {obj: $('ele'), trigger: 'click'}|
 | init          | 初始化时候执行的方法                   | 对象                             | null        | init: { $('ele').show();} |
-| loadFn        | 定义每一页加载成功之后执行的函数（例如一些js动画等等） | 数组                 | null        | loadFn : 1: [{ fn: count, arguments: [$('.page').eq(1).find('.number')]}] |
+| loadFn        | 定义每一页加载成功之后执行的函数（例如一些js动画等等）| 页数：[{fn: 方法, arguments: 参数, delay: 延迟}] | null           | loadFn : 1: [{ fn: count, arguments: [$('.page').eq(1).find('.number')], delay: 1000}] |
 
 ### 以下是一个小例子
 
