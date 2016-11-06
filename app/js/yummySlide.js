@@ -152,7 +152,7 @@
           var _fn = fn.fn;
           var _arguments = fn.arguments ? fn.arguments : null;
           var delay = fn.delay ? fn.delay : undefined;
-          if (isNaN(delay)) {
+          if (!isNaN(delay)) {
             setTimeout(function() {
               _fn.apply(this, _arguments);
             }, delay);
@@ -167,7 +167,7 @@
       $page.eq(order[i]).attr('data-order', i);
     }
     $container.show();
-    !!Slide.opts.init && Slide.opts.init();
+    isObjEmpty(Slide.opts.init) && Slide.opts.init();
   };
 
 
@@ -181,18 +181,19 @@
     $(document).on('touchmove', function(e) {
       e.preventDefault();
     });
-    var custom = !!Slide.opts.custom ? Slide.opts.custom : null;
-    !!custom && (function() {
-      for (var i = custom.length - 1; i >= 0; i--) {
-        var customObj = custom[i].obj,
-          customTrigger = custom[i].trigger;
+
+    var custom = Slide.opts.custom;
+    if (!isObjEmpty(custom)) {
+      custom.forEach(function(el, i) {
+        var customObj = el.obj,
+          customTrigger = el.trigger;
         customObj.each(function() {
           $(this).on(customTrigger, function(e) {
             $this.customMove();
           });
         });
-      };
-    })();
+      });
+    }
 
     $container.on('touchstart', $this.start).on('touchmove', $this.move).on('touchend touchcancel', $this.end);
   };
@@ -239,7 +240,7 @@
    * start move end 三个touch事件处理方法
    */
   Slide.prototype.start = function(e) {
-    if (!!Slide.params.isAnimating) return;
+    if (Slide.params.isAnimating) return;
     var params = Slide.params,
       $page = params.page;
     var touch = window.Zepto ? e.changedTouches[0] : e.originalEvent.touches[0];
@@ -248,7 +249,7 @@
   }
 
   Slide.prototype.move = function(e) {
-    if (!!Slide.params.isAnimating || !Slide.params.startPos) return;
+    if (Slide.params.isAnimating || isNan(Slide.params.startPos)) return;
     e.preventDefault();
     Slide.params.isTap = false;
     var touch = window.Zepto ? e.changedTouches[0] : e.originalEvent.touches[0];
@@ -260,17 +261,18 @@
       $curPage = params.curPage;
 
     var distance = coordinate - startPos;
-    if (distance < 0 && $curPage.hasClass('pause')) return; // 如果往前滑而且当前页还没有触发过自定义滑动
+    // 如果往前滑而且当前页还没有触发过自定义滑动
+    if (distance < 0 && $curPage.hasClass('pause')) return; 
     // 判断是否滑过起点改变方向，否则就直接跳过getNextPage
-    if (isForward() !== params.isForward || params.isForward === 0 || params.isForward === null) getNextPage(distance); // 获取nextPage
+    if (isForward() !== params.isForward) getNextPage(distance); // 获取nextPage
     $nextPage = Slide.params.nextPage;
-    if (!$nextPage) return; // 非循环滑动时候滑到边界的时候会触发此条
+    if (isObjEmpty($nextPage)) return; // 非循环滑动时候滑到边界的时候会触发此条
     params.curPos = coordinate;
     Slide.method.transNext($curPage, $nextPage, distance);
   }
 
   Slide.prototype.end = function(e) {
-    if (!!Slide.params.isAnimating || !!Slide.params.isTap || !Slide.params.nextPage || !Slide.params.startPos) return Slide.params.startPos = undefined;
+    if (Slide.params.isAnimating || Slide.params.isTap || isObjEmpty(Slide.params.nextPage) || isNan(Slide.params.startPos)) return Slide.params.startPos = undefined;
     var params = Slide.params,
       startPos = params.startPos,
       curPos = params.curPos,
@@ -349,7 +351,7 @@
   }
 
   function getNextPage(distance) {
-    if (distance === 0) return !!Slide.params.nextPage && (Slide.params.nextPage = null);
+    if (distance === 0) return !isObjEmpty(Slide.params.nextPage) && (Slide.params.nextPage = null);
 
     var params = Slide.params,
       $page = params.page,
@@ -461,7 +463,7 @@
             var _fn = fn.fn;
             var _arguments = fn.arguments ? fn.arguments : null;
             var delay = fn.delay ? fn.delay : undefined;
-            if (isNaN(delay)) {
+            if (!isNaN(delay)) {
               setTimeout(function() {
                 _fn.apply(this, _arguments);
               }, delay);
@@ -472,7 +474,9 @@
         }
       }
       setTimeout(function() {
-        params.isAnimating = params.nextPage = params.startPos = params.curPos = params.isForward = null;
+        params.isAnimating = params.isForward = false;
+        params.startPos = params.curPos = undefined;
+        params.nextPage = null;
       }, 20);
     }).emulateTransitionEnd(900 + 10);
   }
@@ -509,7 +513,9 @@
         'z-index': 2
       }).hide();
       setTimeout(function() {
-        params.isAnimating = params.nextPage = params.startPos = params.curPos = params.isForward = null;
+        params.isAnimating = params.isForward = false;
+        params.startPos = params.curPos = undefined;
+        params.nextPage = null;
       }, 20);
     }).emulateTransitionEnd(900 + 50);
   }
