@@ -18,20 +18,20 @@ var src = {
 };
 
 var buildSrc = {
-  js: 'build/js',
-  css: 'build/css',
-  html: 'build/'
+  js: 'docs/js',
+  css: 'docs/css',
+  html: 'docs/'
 }
 
 // Static Server + watching less/html files
 gulp.task('serve', ['less'], function() {
 
-  browserSync({
-    server: "./app"
-  });
+    browserSync({
+        server: "./app"
+    });
 
-  gulp.watch(src.less, ['less']);
-  gulp.watch(src.html).on('change', reload);
+    gulp.watch(src.less, ['less']);
+    gulp.watch(src.html).on('change', reload);
 });
 
 // Compile less into CSS

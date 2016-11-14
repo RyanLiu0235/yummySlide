@@ -1,145 +1,144 @@
 @charset 'utf-8';
 @import './base.less';
+@import './common.less';
 html,
 body {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .y-slide {
-  width: 100%;
-  height: 100%;
-  .container {
-    display: none;
     width: 100%;
     height: 100%;
-  }
+    .container {
+        display: none;
+        width: 100%;
+        height: 100%;
+    }
 }
-
 .windmill {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 200px;
-  height: 200px;
-  margin: -100px 0 0 -100px;
-  .wing {
-    position: absolute;
-    .triangle_big {
-      position: absolute;
-      height: 0;
-    }
-    .triangle_small {
-      position: absolute;
-      height: 0;
-    }
-  }
-  .wing_top {
-    top: 0;
-    left: 100px;
-    width: 50px;
-    height: 100px;
-    .triangle_big {
-      top: 0;
-      left: 0;
-      border-top: 50px solid transparent;
-      border-bottom: 50px solid transparent;
-      border-left: 50px solid #EF9C89;
-    }
-    .triangle_small {
-      bottom: 0;
-      left: 0;
-      border-top: 50px solid transparent;
-      border-right: 50px solid #FDEE84;
-    }
-  }
-  .wing_right {
-    top: 100px;
-    left: 100px;
-    width: 100px;
-    height: 50px;
-    .triangle_big {
-      top: 0;
-      left: 0;
-      border-left: 50px solid transparent;
-      border-right: 50px solid transparent;
-      border-top: 50px solid #C3FFB2;
-    }
-    .triangle_small {
-      bottom: 0;
-      left: 0;
-      border-top: 50px solid transparent;
-      border-left: 50px solid #84FDDD;
-    }
-  }
-  .wing_bottom {
-    top: 100px;
-    left: 50px;
-    width: 50px;
-    height: 100px;
-    .triangle_big {
-      top: 0;
-      left: 0;
-      border-top: 50px solid transparent;
-      border-bottom: 50px solid transparent;
-      border-right: 50px solid #89B5EF;
-    }
-    .triangle_small {
-      top: 0;
-      left: 0;
-      border-right: 50px solid transparent;
-      border-top: 50px solid #BE85DF;
-    }
-  }
-  .wing_left {
-    top: 50px;
-    left: 0;
-    width: 100px;
-    height: 50px;
-    .triangle_big {
-      top: 0;
-      left: 0;
-      border-left: 50px solid transparent;
-      border-right: 50px solid transparent;
-      border-bottom: 50px solid #DF85AE;
-    }
-    .triangle_small {
-      top: 0;
-      right: 0;
-      border-left: 50px solid transparent;
-      border-top: 50px solid #DF8585;
-    }
-  }
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 200px;
+	height: 200px;
+	margin: -100px 0 0 -100px;
+	.wing {
+		position: absolute;
+		.triangle_big {
+			position: absolute;
+			height: 0;
+		}
+		.triangle_small {
+			position: absolute;
+			height: 0;
+		}
+	}
+	.wing_top {
+		top: 0;
+		left: 100px;
+		width: 50px;
+		height: 100px;
+		.triangle_big {
+			top: 0;
+			left: 0;
+			border-top: 50px solid transparent;
+			border-bottom: 50px solid transparent;
+			border-left: 50px solid #EF9C89;
+		}
+		.triangle_small {
+			bottom: 0;
+			left: 0;
+			border-top: 50px solid transparent;
+		    border-right: 50px solid #FDEE84;
+		}
+	}
+	.wing_right {
+		top: 100px;
+		left: 100px;
+		width: 100px;
+		height: 50px;
+		.triangle_big {
+			top: 0;
+			left: 0;
+			border-left: 50px solid transparent;
+			border-right: 50px solid transparent;
+			border-top: 50px solid #C3FFB2;
+		}
+		.triangle_small {
+			bottom: 0;
+			left: 0;
+			border-top: 50px solid transparent;
+		    border-left: 50px solid #84FDDD;
+		}
+	}
+	.wing_bottom {
+		top: 100px;
+		left: 50px;
+		width: 50px;
+		height: 100px;
+		.triangle_big {
+			top: 0;
+			left: 0;
+			border-top: 50px solid transparent;
+			border-bottom: 50px solid transparent;
+			border-right: 50px solid #89B5EF;
+		}
+		.triangle_small {
+			top: 0;
+			left: 0;
+			border-right: 50px solid transparent;
+		    border-top: 50px solid #BE85DF;
+		}
+	}
+	.wing_left {
+		top: 50px;
+		left: 0;
+		width: 100px;
+		height: 50px;
+		.triangle_big {
+			top: 0;
+			left: 0;
+			border-left: 50px solid transparent;
+			border-right: 50px solid transparent;
+			border-bottom: 50px solid #DF85AE;
+		}
+		.triangle_small {
+			top: 0;
+			right: 0;
+			border-left: 50px solid transparent;
+		    border-top: 50px solid #DF8585;
+		}
+	}
 }
-
 .page:nth-of-type(1) {
-  background-color: #885A4F;
+    background-color: #885A4F;
 }
 
 .page:nth-of-type(2) {
-  background-color: #8A8147;
+    background-color: #8A8147;
 }
 
 .page:nth-of-type(3) {
-  background-color: #629E51;
+    background-color: #629E51;
 }
 
 .page:nth-of-type(4) {
-  background-color: #57A590;
+    background-color: #57A590;
 }
 
 .page:nth-of-type(5) {
-  background-color: #536D8E;
+    background-color: #536D8E;
 }
 
 .page:nth-of-type(6) {
-  background-color: #7C5592;
+    background-color: #7C5592;
 }
 
 .page:nth-of-type(7) {
-  background-color: #8A526B;
+    background-color: #8A526B;
 }
 
 .page:nth-of-type(8) {
-  background-color: #925757;
+    background-color: #925757;
 }
