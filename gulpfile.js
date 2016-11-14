@@ -49,7 +49,7 @@ gulp.task('less', function() {
 
 // 压缩css文件
 gulp.task('minify-css', ['less'], function() {
-  return gulp.src(src.css + '/slide.css')
+  return gulp.src(src.css + '/*.css')
     .pipe(concat('slide.css'))
     .pipe(minifyCSS())
     .pipe(gulp.dest(buildSrc.css));
